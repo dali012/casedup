@@ -32,7 +32,7 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
 
   const { id } = configuration;
 
-  const { user } = useKindeBrowserClient();
+  const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
 
   const { croppedImageUrl, color, model, finish, material } = configuration;
 
@@ -67,7 +67,7 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
   });
 
   const handleCheckout = () => {
-    if (user) {
+    if (isAuthenticated && user) {
       createPaymentSession({ configId: id });
     } else {
       localStorage.setItem("configurationId", id);
@@ -193,6 +193,9 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
             </div>
             <div className="mt-8 flex justify-end pb-12">
               <Button
+                isLoading={isLoading!}
+                disabled={isLoading!}
+                loadingText="Loading"
                 className="px-4 sm:px-6 lg:px-8"
                 onClick={() => handleCheckout()}
               >
