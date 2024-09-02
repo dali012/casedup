@@ -32,7 +32,8 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
 
   const { id } = configuration;
 
-  const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
+  const { getUser, isLoading } = useKindeBrowserClient();
+  const user = getUser();
 
   const { croppedImageUrl, color, model, finish, material } = configuration;
 
@@ -67,7 +68,7 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
   });
 
   const handleCheckout = () => {
-    if (isAuthenticated && user) {
+    if (user && !isLoading) {
       createPaymentSession({ configId: id });
     } else {
       localStorage.setItem("configurationId", id);
