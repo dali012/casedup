@@ -92,7 +92,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="col-span-full lg:col-span-1 w-full flex justify-center px-8 sm:px-16 md:px-0 mt-32 lg:mx-0 lg:mt-20 h-fit">
+          <div className="lg:col-span-1 w-full flex justify-center px-8 sm:px-16 md:px-0 mt-32 lg:mx-0 lg:mt-20 h-fit">
             <div className="relative md:max-w-xl">
               <img
                 src="/your-image.png"
@@ -256,7 +256,7 @@ export default function Home() {
                 href="/configure/upload"
                 className={buttonVariants({
                   size: "lg",
-                  className: "mx-auto mt-8"
+                  className: "mx-auto mt-8",
                 })}
               >
                 Create your case now <ArrowRight className="h-4 w-4 ml-1.5" />

@@ -33,8 +33,10 @@ const Page = () => {
     const [file] = rejectedFiles;
     setIsDragOver(false);
     toast({
-      title: `${file.file.type} type is not supported`,
-      description: "Please use a PNG, JPG, or JPEG image.",
+      title: `${
+        file.file.type ? file.file.type : "Your file "
+      } type is not supported.`,
+      description: "Please choose a PNG, JPG, or JPEG image instead.",
       variant: "destructive",
     });
   };
