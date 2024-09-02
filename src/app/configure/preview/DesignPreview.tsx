@@ -32,8 +32,7 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
 
   const { id } = configuration;
 
-  const { getUser, isLoading } = useKindeBrowserClient();
-  const user = getUser();
+  const { user, isLoading } = useKindeBrowserClient();
 
   const { croppedImageUrl, color, model, finish, material } = configuration;
 
