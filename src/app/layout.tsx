@@ -5,14 +5,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/components/Providers";
+import { constructMetadata } from "@/lib/utils";
 
 const recursive = Recursive({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "CasedUp",
-  description:
-    "Discover CasedUp, your go-to destination for exclusive, artist-inspired phone cases. Shop premium, customizable cases that offer both style and protection. Elevate your phone's look today!",
-};
+export const metadata = constructMetadata();
 
 export default function RootLayout({
   children,
