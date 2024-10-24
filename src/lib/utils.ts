@@ -16,7 +16,7 @@ export const formatPrice = (price: number) => {
 export function constructMetadata({
   title = "CasedUp - Premium Phone Cases",
   description = "Discover CasedUp, your go-to destination for exclusive, artist-inspired phone cases. Shop premium, customizable cases that offer both style and protection. Elevate your phone's look today!",
-  image = "/thumbnail.png",
+  image = "/thumbnail.webp",
   icons = "/favicon.ico",
 }: {
   title?: string;

@@ -36,7 +36,7 @@ const OrderReceivedEmail = ({
         <Container style={container}>
           <Section style={message}>
             <Img
-              src={`${baseUrl}/snake-3.png`}
+              src={`${baseUrl}/snake-3.webp`}
               width="65"
               height="73"
               alt="delivery snake"

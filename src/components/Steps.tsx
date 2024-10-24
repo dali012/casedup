@@ -32,7 +32,7 @@ const Steps = () => {
         const isCompleted = STEPS.slice(index + 1).some((step) =>
           pathname.endsWith(step.url)
         );
-        const imgPath = `/snake-${index + 1}.png`;
+        const imgPath = `/snake-${index + 1}.webp`;
 
         return (
           <li key={step.name} className="relative overflow-hidden lg:flex-1">

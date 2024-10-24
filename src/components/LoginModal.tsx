@@ -17,7 +17,7 @@ const LoginModal = ({ isOpen, setIsOpen }: ILoginingModalProps) => {
         <DialogHeader>
           <div className="relative mx-auto w-24 h-24 mb-2">
             <Image
-              src="/snake-1.png"
+              src="/snake-1.webp"
               alt="snake image"
               className="object-contain"
               fill

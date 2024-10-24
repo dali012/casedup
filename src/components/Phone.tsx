@@ -20,8 +20,8 @@ const Phone = ({ className, dark = false, imgSrc, ...props }: IPhoneProps) => {
         className="relative pointer-events-none z-50 overflow-hidden"
         src={
           dark
-            ? "/phone-template-dark-edges.png"
-            : "/phone-template-white-edges.png"
+            ? "/phone-template-dark-edges.webp"
+            : "/phone-template-white-edges.webp"
         }
         alt="Phone image"
       />

@@ -9,12 +9,12 @@ import { cn } from "@/lib/utils";
 import Phone from "./Phone";
 
 const PHONES = [
-  "/testimonials/1.jpg",
-  "/testimonials/2.jpg",
-  "/testimonials/3.jpg",
-  "/testimonials/4.jpg",
-  "/testimonials/5.jpg",
-  "/testimonials/6.jpg",
+  "/testimonials/1.webp",
+  "/testimonials/2.webp",
+  "/testimonials/3.webp",
+  "/testimonials/4.webp",
+  "/testimonials/5.webp",
+  "/testimonials/6.webp",
 ];
 
 interface IReviewProps extends HTMLAttributes<HTMLDivElement> {
@@ -151,7 +151,7 @@ const Reviews = () => {
     <MaxWidthWrapper className="relative max-w-5xl">
       <img
         aria-hidden="true"
-        src="/what-people-are-buying.png"
+        src="/what-people-are-buying.webp"
         alt="Reviews image"
         className="absolute select-none hidden xl:block -left-32 top-1/3"
       />
