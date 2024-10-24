@@ -27,6 +27,22 @@ export const createCheckoutSession = async ({
   if (!user) {
     throw new Error("You need to be logged in");
   }
+  if (!user?.id || !user?.email) {
+    throw new Error("Invalid User Data");
+  }
+
+  const existingUser = await db.user.findFirst({
+    where: { id: user.id },
+  });
+
+  if (!existingUser) {
+    await db.user.create({
+      data: {
+        id: user.id,
+        email: user.email,
+      },
+    });
+  }
 
   const { finish, material } = configuration;
 
