@@ -21,6 +21,8 @@ import { formatPrice } from "@/lib/utils";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 import StatusDropdown from "./StatusDropdown";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 const Page = async () => {
   const { getUser } = getKindeServerSession();
@@ -46,6 +48,7 @@ const Page = async () => {
       user: true,
       shippingAddress: true,
       configuration: true,
+      billingAddress: true,
     },
   });
 
@@ -133,7 +136,11 @@ const Page = async () => {
                   <TableHead className="hidden sm:table-cell">
                     Purchase date
                   </TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
+                  <TableHead>Amount</TableHead>
+                  <TableHead>Model</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Download Image
+                  </TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -154,11 +161,22 @@ const Page = async () => {
                         orderStatus={order.status}
                       />
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">
+                    <TableCell>
                       {order.createdAt.toLocaleDateString()}
                     </TableCell>
-                    <TableCell className="text-right">
-                      {formatPrice(order.amount)}
+                    <TableCell>{formatPrice(order.amount)}</TableCell>
+                    <TableCell>{order.configuration.model}</TableCell>
+                    <TableCell>
+                      <Link
+                        href={order.configuration.croppedImageUrl!}
+                        target="_blank"
+                        className={buttonVariants({
+                          size: "sm",
+                          variant: "outline",
+                        })}
+                      >
+                        Download ⬇️
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}

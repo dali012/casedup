@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/components/Providers";
 import { constructMetadata } from "@/lib/utils";
 
-const recursive = Recursive({ subsets: ["latin"] });
+const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 
 export const metadata = constructMetadata();
 
