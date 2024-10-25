@@ -44,6 +44,6 @@ export function constructMetadata({
       images: [image],
       creator: "@CasedUp",
     },
-    metadataBase: new URL("https://casedup.vercel.app"),
+    metadataBase: new URL("https://casedup.store"),
   };
 }
