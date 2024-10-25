@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Providers from "@/components/Providers";
 import { constructMetadata } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
             <Providers>
               {children}
               <SpeedInsights />
+              <Analytics />
             </Providers>
           </div>
           <Footer />
