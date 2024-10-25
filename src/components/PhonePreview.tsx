@@ -4,13 +4,14 @@ import { CaseColor } from "@prisma/client";
 import { useEffect, useRef, useState } from "react";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import { COLORS } from "@/validators/option-validator";
 
 const PhonePreview = ({
   croppedImageUrl,
-  color,
+  userColor,
 }: {
   croppedImageUrl: string;
-  color: CaseColor;
+  userColor: CaseColor;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -33,15 +34,8 @@ const PhonePreview = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  let caseBackgroundColor = "bg-zinc-900";
-
-  if (color === "blue") {
-    caseBackgroundColor = "bg-blue-950";
-  }
-
-  if (color === "rose") {
-    caseBackgroundColor = "bg-rose-950";
-  }
+  const caseBackgroundColor =
+    COLORS.find((color) => color.value === userColor)?.tw || "bg-zinc-950";
 
   return (
     <AspectRatio ref={ref} ratio={3000 / 2001} className="relative">

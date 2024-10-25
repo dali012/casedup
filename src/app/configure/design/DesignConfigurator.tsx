@@ -1,22 +1,19 @@
 "use client";
 
+import HandleComponent from "@/components/HandleComponent";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useToast } from "@/components/ui/use-toast";
-import { base64ToBlob } from "@/lib/base64ToBlob";
-import { useUploadThing } from "@/lib/uploadthing";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn, formatPrice } from "@/lib/utils";
+import NextImage from "next/image";
+import { Rnd } from "react-rnd";
+import { RadioGroup } from "@headlessui/react";
+import { useRef, useState } from "react";
 import {
   COLORS,
   FINISHES,
   MATERIALS,
   MODELS,
 } from "@/validators/option-validator";
-import { useRef, useState } from "react";
-import NextImage from "next/image";
-import { cn, formatPrice } from "@/lib/utils";
-import { Rnd } from "react-rnd";
-import HandleComponent from "@/components/HandleComponent";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { RadioGroup } from "@headlessui/react";
 import { Label } from "@/components/ui/label";
 import {
   DropdownMenu,
@@ -27,12 +24,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
+import { useUploadThing } from "@/lib/uploadthing";
+import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
-import {
-  SaveConfigurationArgs,
-  saveConfiguration as _saveConfiguration,
-} from "./actions";
 import { useRouter } from "next/navigation";
+import {
+  saveConfiguration as _saveConfig,
+  SaveConfigurationArgs,
+} from "./actions";
 
 interface DesignConfiguratorProps {
   configId: string;
@@ -46,19 +45,17 @@ const DesignConfigurator = ({
   imageDimensions,
 }: DesignConfiguratorProps) => {
   const { toast } = useToast();
-
   const router = useRouter();
 
-  const { mutate: save, isPending } = useMutation({
-    mutationKey: ["saveConfiguration"],
+  const { mutate: saveConfig, isPending } = useMutation({
+    mutationKey: ["save-config"],
     mutationFn: async (args: SaveConfigurationArgs) => {
-      await Promise.all([saveConfiguration(), _saveConfiguration(args)]);
+      await Promise.all([saveConfiguration(), _saveConfig(args)]);
     },
     onError: () => {
       toast({
         title: "Something went wrong",
-        description:
-          "There was a problem saving your config, please try again.",
+        description: "There was an error on our end. Please try again.",
         variant: "destructive",
       });
     },
@@ -74,7 +71,7 @@ const DesignConfigurator = ({
     finish: (typeof FINISHES.options)[number];
   }>({
     color: COLORS[0],
-    model: MODELS.options[5],
+    model: MODELS.options[0],
     material: MATERIALS.options[0],
     finish: FINISHES.options[0],
   });
@@ -133,7 +130,7 @@ const DesignConfigurator = ({
       const base64 = canvas.toDataURL();
       const base64Data = base64.split(",")[1];
 
-      const blob = base64ToBlob(base64Data);
+      const blob = base64ToBlob(base64Data, "image/png");
       const file = new File([blob], "filename.png", { type: "image/png" });
 
       await startUpload([file], { configId });
@@ -145,6 +142,16 @@ const DesignConfigurator = ({
         variant: "destructive",
       });
     }
+  }
+
+  function base64ToBlob(base64: string, mimeType: string) {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
   }
 
   return (
@@ -162,7 +169,7 @@ const DesignConfigurator = ({
             <NextImage
               fill
               alt="phone image"
-              src="/phone-template.webp"
+              src="/phone-template.png"
               className="pointer-events-none z-50 select-none"
             />
           </AspectRatio>
@@ -389,23 +396,21 @@ const DesignConfigurator = ({
                 )}
               </p>
               <Button
-                isLoading={isPending}
                 disabled={isPending}
-                loadingText="Saving"
                 onClick={() =>
-                  save({
+                  saveConfig({
                     configId,
                     color: options.color.value,
-                    model: options.model.value,
-                    material: options.material.value,
                     finish: options.finish.value,
+                    material: options.material.value,
+                    model: options.model.value,
                   })
                 }
                 size="sm"
                 className="w-full"
               >
-                Continue
-                <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+                {isPending ? "Saving" : "Continue"}
+                {!isPending && <ArrowRight className="h-4 w-4 ml-1.5 inline" />}
               </Button>
             </div>
           </div>

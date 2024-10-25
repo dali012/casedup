@@ -30,11 +30,9 @@ const DesignPreview = ({ configuration }: IDesignPreviewProps) => {
 
   const router = useRouter();
 
-  const { id } = configuration;
-
   const { user, isLoading } = useKindeBrowserClient();
 
-  const { croppedImageUrl, color, model, finish, material } = configuration;
+  const { color, model, finish, material, id, croppedImageUrl } = configuration;
 
   const tw = COLORS.find((c) => c.value === color)?.tw;
   const { label: modelLabel } = MODELS.options.find((m) => m.value === model)!;

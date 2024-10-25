@@ -1,6 +1,5 @@
 import { db } from "@/db";
 import { stripe } from "@/lib/stripe";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { Resend } from "resend";
@@ -11,7 +10,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text();
-    const signature = headers().get("Stripe-Signature");
+    const signature = request.headers.get("Stripe-Signature");
 
     if (!signature) {
       return new Response("Invalid signature", { status: 400 });
@@ -22,6 +21,9 @@ export async function POST(request: NextRequest) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!
     );
+
+    console.log("Event type:", event.type);
+    console.log("Event Object:", event);
 
     if (event.type === "checkout.session.completed") {
       if (!event.data.object.customer_details) {
