@@ -1,12 +1,12 @@
-import Providers from "@/components/Providers";
+import { Recursive } from "next/font/google";
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Recursive } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import Providers from "@/components/Providers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { ReactNode } from "react";
-import "./globals.css";
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 
@@ -71,16 +71,25 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <GoogleAnalytics gaId="G-JX2V1KYQPC" />
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        />
+      </head>
       <body className={recursive.className}>
         <Navbar />
         <main className="flex flex-col min-h-[calc(100vh-3.5rem-1px)] grainy-light">
           <div className="flex-1 flex flex-col h-full">
-            <Providers>{children}</Providers>
+            <Providers>
+              {children}
+              <SpeedInsights />
+              <Analytics />
+            </Providers>
           </div>
           <Footer />
         </main>

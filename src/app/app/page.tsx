@@ -271,6 +271,17 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/phone-models"
+              className={buttonVariants({
+                variant: "outline",
+                size: "lg",
+              })}
+            >
+              See All Supported Models
+            </Link>
+          </div>
         </MaxWidthWrapper>
       </section>
 
