@@ -35,8 +35,8 @@ export default function Home() {
                 <span className="font-semibold">artist-inspired</span> phone
                 cases that redefine your style.
               </p>
-              <ul className="mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-start">
-                <div className="space-y-2">
+              <div className="mt-8 space-y-2 text-left font-medium flex flex-col items-center sm:items-start">
+                <ul className="space-y-2">
                   <li className="flex gap-1.5 items-center text-left">
                     <Check className="w-5 h-5 shrink-0 text-green-600" />
                     Premium Quality Durable materials.
@@ -53,8 +53,8 @@ export default function Home() {
                     <Check className="w-5 h-5 shrink-0 text-green-600" />
                     Modern iPhone models supported
                   </li>
-                </div>
-              </ul>
+                </ul>
+              </div>
 
               <div className="mt-12 flex flex-col sm:flex-row items-center sm:items-start gap-5">
                 <div className="flex -space-x-4">
