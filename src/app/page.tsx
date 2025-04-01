@@ -88,7 +88,7 @@ export default function Home() {
                   />
                   <Image
                     className="inline-block h-10 w-10 rounded-full ring-2 ring-slate-100"
-                    src="/users/user-5.webp"
+                    src="/users/user-5.jpg"
                     alt="Satisfied CasedUp customer"
                     width={40}
                     height={40}

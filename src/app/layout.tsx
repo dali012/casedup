@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { ReactNode } from "react";
 import "./globals.css";
+import Script from "next/script";
 
 const recursive = Recursive({ subsets: ["latin"], display: "swap" });
 
@@ -85,6 +86,11 @@ export default function RootLayout({
           <Footer />
         </main>
         <Toaster />
+        <Script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "ba2b6a22b7e44482ba545675dd2cf893"}'
+        />
       </body>
     </html>
   );
