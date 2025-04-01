@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/utils";
 import { HTMLAttributes } from "react";
+import Image from "next/image";
 
 interface IPhoneProps extends HTMLAttributes<HTMLDivElement> {
   dark?: boolean;
@@ -16,7 +16,7 @@ const Phone = ({ className, dark = false, imgSrc, ...props }: IPhoneProps) => {
       )}
       {...props}
     >
-      <img
+      <Image
         className="relative pointer-events-none z-50 overflow-hidden"
         src={
           dark
@@ -24,12 +24,17 @@ const Phone = ({ className, dark = false, imgSrc, ...props }: IPhoneProps) => {
             : "/phone-template-white-edges.webp"
         }
         alt="Phone image"
+        width={390}
+        height={844}
+        priority
       />
       <div className="absolute -z-10 inset-0">
-        <img
-          className="object-cover min-w-full min-h-full"
+        <Image
+          className="object-cover"
           src={imgSrc}
           alt="Phone image overlay"
+          fill
+          sizes="(max-width: 768px) 100vw, 390px"
         />
       </div>
     </div>

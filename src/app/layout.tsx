@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import { Recursive } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { ReactNode } from "react";
 import "./globals.css";
 import Script from "next/script";
@@ -76,7 +75,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <GoogleAnalytics gaId="G-JX2V1KYQPC" />
       <body className={recursive.className}>
         <Navbar />
         <main className="flex flex-col min-h-[calc(100vh-3.5rem-1px)] grainy-light">
@@ -90,7 +88,21 @@ export default function RootLayout({
           defer
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon='{"token": "ba2b6a22b7e44482ba545675dd2cf893"}'
+          strategy="lazyOnload"
+          id="cloudflare-analytics"
         />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-JX2V1KYQPC`}
+          strategy="lazyOnload"
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JX2V1KYQPC');
+          `}
+        </Script>
       </body>
     </html>
   );

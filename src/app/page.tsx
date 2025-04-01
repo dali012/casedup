@@ -25,10 +25,15 @@ export default function Home() {
                   className="w-full"
                 />
               </div>
-              <h1 className="relative w-fit tracking-tight text-balance mt-10 md:mt-16 font-bold !leading-tight text-gray-900 text-4xl md:text-5xl lg:text-7xl">
-                Custom Phone Cases as{" "}
-                <span className="bg-green-600 px-2 text-white">Unique</span> as
-                You Are.
+              <h1
+                className="relative w-fit tracking-tight text-balance mt-10 md:mt-16 font-bold !leading-tight text-gray-900 text-4xl md:text-5xl lg:text-7xl"
+                style={{ textRendering: "optimizeSpeed" }}
+              >
+                <span className="inline-block">Custom Phone Cases as </span>
+                <span className="bg-green-600 px-2 text-white inline-block">
+                  Unique
+                </span>
+                <span className="inline-block"> as You Are.</span>
               </h1>
               <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
                 Stand out with exclusive,{" "}
